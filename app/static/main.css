@@ -1,0 +1,29 @@
+.sample#darwin {
+  background: #ede0ce;
+  padding: 150px 0;
+  text-align: center; }
+.sample#darwin .text {
+    margin: 0 auto;
+    padding: 0 20px;
+    width: 750px; }
+.sample#darwin h1 {
+    color: #161616;
+    font: 400 58px/58px "old standard tt";
+    margin: 0 0 32px 0;
+    text-transform: uppercase; }
+.sample#darwin h1.small {
+      font-size: 18px; }.sample#darwin h2 {
+    color: #161616;
+    font: 400 28px/28px "old standard tt";
+    margin: 160px 0 14px 0;
+    text-transform: uppercase; }
+.sample#darwin h3 {
+    color: #161616;
+    font: 400 14px/21px "old standard tt";
+    margin: 0 0 80px 0;
+    text-transform: uppercase; }
+.sample#darwin h4 {
+    color: #161616;
+    font: 400 14px/21px "old standard tt";
+    font-style: italic;
+    margin: 0; }
