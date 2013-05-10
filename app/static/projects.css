@@ -1,0 +1,45 @@
+.sample#nabokov {
+  background: #85878d;
+  padding: 0 0 300px 0;}
+
+.sample#nabokov .text {
+  margin: 0 auto;
+  padding: 0 20px;
+  text-align: left;
+  width: 700px;
+  }
+
+.sample#nabokov h1 {
+    color: #242526;
+    font: italic 700 84px/1.2 'playfair display';}
+
+.sample#nabokov .first {
+  float: left;
+  padding: 200px 0 0 0;
+  margin: 0 0 -10px 0;
+  width: 142px;
+  }
+
+.sample#nabokov .second {
+  border-left: 8px solid #242526;
+  float: left;
+  margin: 0 0 -10px 0;
+  padding: 200px 0 0 25px;
+  width: auto;
+}
+
+.sample#nabokov .third {
+  clear: both;
+  font-style: normal;
+  font-weight: 900;
+  margin: 0 0 0 172px;
+    }
+
+
+.sample#nabokov p {
+  color: #2e2f31;
+  font: 400 14px/1 'playfair display';
+  letter-spacing: 1px;
+  margin: 18px 0 0 175px;
+  text-transform: uppercase;
+  }
