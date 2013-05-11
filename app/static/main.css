@@ -2,6 +2,11 @@
   background: #ede0ce;
   padding: 150px 0;
   text-align: center; }
+.sample#darwin .notcenter{
+  margin: 0 auto;
+  padding: 0 20px;
+  width: 750px;
+  text-align: left; }
 .sample#darwin .text {
     margin: 0 auto;
     padding: 0 20px;
@@ -12,7 +17,8 @@
     margin: 0 0 32px 0;
     text-transform: uppercase; }
 .sample#darwin h1.small {
-      font-size: 18px; }.sample#darwin h2 {
+      font-size: 18px; }
+.sample#darwin h2 {
     color: #161616;
     font: 400 28px/28px "old standard tt";
     margin: 160px 0 14px 0;
