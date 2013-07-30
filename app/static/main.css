@@ -25,7 +25,7 @@ img.expanded {
     width: 750px; }
 .sample#darwin h1 {
     color: #161616;
-    font: 400 58px/58px "old standard tt";
+    font: 400 58px/58px "nosifer";
     margin: 0 0 32px 0;
     text-transform: uppercase; }
 .sample#darwin h1.small {
@@ -45,3 +45,4 @@ img.expanded {
     font: 400 14px/21px "old standard tt";
     font-style: italic;
     margin: 0; }
+
