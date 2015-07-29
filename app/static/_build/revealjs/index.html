@@ -1,0 +1,409 @@
+
+
+
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <!--<title>Front End Frameworks: But why? &mdash; Hackbright Fellowship</title>-->
+  <title>Front End Frameworks: But why?</title>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+  <link rel="stylesheet" href="_static/revealjs/css/reveal.css"/>
+  <link rel="stylesheet" href="_static/revealjs/css/theme/black.css" id="theme"/>
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/hackbright.css" type="text/css" />
+  <!-- <link rel="stylesheet" href="_static/hackbright.css"/> -->
+
+</head>
+<body>
+<div class="reveal">
+  <footer id="slide-footer">
+  </footer>
+
+  <div class="slides">
+    <section>
+      <h2>Front End Frameworks: But why?</h2>
+      <div class="event"></div>
+    </section>
+
+    
+  <section id="disclaimer">
+<section>
+<h2>Disclaimer</h2>
+</section><section id="a-disclaimer">
+<h3>A Disclaimer</h3>
+<p>On learning your first JavaScript Framework</p>
+<div class="container">
+<ul class="simple">
+<li class="fragment">first know JavaScript</li>
+<li class="fragment">first master a web framework</li>
+<li class="fragment">don&#8217;t try to do it in 1 day</li>
+<li class="fragment">HB Fellows: probably don&#8217;t do it for your Hackbright project</li>
+</ul>
+</div>
+</section></section><section id="javascript-history">
+<section>
+<h2>JavaScript History</h2>
+</section><section id="a-storied-past">
+<h3>A Storied Past</h3>
+<div class="container">
+<ul class="simple">
+<li class="fragment">1998-early 2000s JavaScript gets standardized for multiple browsers</li>
+<li class="fragment">2006- jQuery released, ends up winning the battle of the JS libraries for the timebeing</li>
+</ul>
+</div>
+</section><section id="front-end-frameworks-come-on-the-scene">
+<h3>Front End Frameworks Come on the Scene</h3>
+<img alt="_images/new-js-fw.png" src="_images/new-js-fw.png" />
+<div class="container">
+<ul class="simple">
+<li class="fragment">2009- AngularJS (Brat Tech LLC, Google and community)</li>
+<li class="fragment">2010- Backbone (Jeremy Ashkenas)</li>
+<li class="fragment">2011- Ember.js (Yehuda Katz, Tom Dale, community)</li>
+<li class="fragment">2013- React.js (Facebook, Instagram, community)</li>
+</ul>
+</div>
+</section></section><section id="the-case-for-front-end-frameworks">
+<section>
+<h2>The Case for Front End Frameworks</h2>
+</section><section id="why-fefs-are-awesome-apparently">
+<h3>Why FEFs Are Awesome, Apparently</h3>
+<div class="container">
+<ul class="simple">
+<li class="fragment">Easily testable</li>
+<li class="fragment">More maintainable</li>
+<li class="fragment">Safer</li>
+<li class="fragment">Faster</li>
+<li class="fragment">Easy on the eyes</li>
+</ul>
+</div>
+</section></section><section id="designing-an-application-without-a-front-end-framework">
+<section>
+<h2>Designing an Application Without a Front End Framework</h2>
+</section><section id="let-s-talk-about">
+<h3>Let&#8217;s Talk About...</h3>
+<div class="container">
+<ul class="simple">
+<li class="fragment">Database design</li>
+<li class="fragment">Designing your controllers (a.k.a. <em>routes</em>)</li>
+<li class="fragment">Designing web page&#8217;s behavior with JavaScript</li>
+</ul>
+</div>
+</section><section id="database-design-elegant">
+<h3>Database Design - elegant?</h3>
+<div class="compare container">
+<a class="reference internal image-reference" href="_images/database_schema.jpg"><img alt="_images/database_schema.jpg" src="_images/database_schema.jpg" style="width: 70%;" /></a>
+<a class="reference internal image-reference" href="_images/coco.jpg"><img alt="_images/coco.jpg" src="_images/coco.jpg" style="width: 20%;" /></a>
+</div>
+</section><section id="designing-your-controllers-elegant">
+<h3>Designing Your Controllers - elegant?</h3>
+<div class="fragment container">
+<div class="highlight-python"><div class="highlight"><pre><span class="nd">@app.route</span><span class="p">(</span><span class="s">&#39;/submit&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">submit_form</span><span class="p">():</span>
+    <span class="k">pass</span>
+
+<span class="nd">@app.route</span><span class="p">(</span><span class="s">&#39;/process_form&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">process_profile</span><span class="p">():</span>
+    <span class="k">pass</span>
+
+<span class="nd">@app.route</span><span class="p">(</span><span class="s">&#39;/form&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">process_async_form</span><span class="p">():</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+</section><section id="id1">
+<h3>Designing Your Controllers - elegant?</h3>
+<p>(Cont.)</p>
+<div class="compare container">
+<a class="reference internal image-reference" href="_images/audrey.jpg"><img alt="_images/audrey.jpg" src="_images/audrey.jpg" style="width: 15%;" /></a>
+<div class="highlight-python"><div class="highlight"><pre><span class="nd">@app.route</span><span class="p">(</span><span class="s">&#39;/users/&lt;int:user_id&gt;/save&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">create_user</span><span class="p">():</span>
+    <span class="k">pass</span>
+
+<span class="nd">@app.route</span><span class="p">(</span><span class="s">&#39;/users/&lt;int:user_id&gt;/profile&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">profile</span><span class="p">():</span>
+    <span class="k">pass</span>
+
+<span class="nd">@app.route</span><span class="p">(</span><span class="s">&#39;/save_profile&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">save_profile_async</span><span class="p">():</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+</section><section id="designing-page-behavior-with-only-javascript-elegant">
+<h3>Designing Page Behavior with only JavaScript: elegant?</h3>
+<div class="container">
+<ul class="simple">
+<li class="fragment"><cite>Live Demo</cite>! A textbox that shows the character count when the user clicks a button.</li>
+<li class="fragment"><em>User</em>: be the user of the web page.</li>
+<li class="fragment"><em>Event listener</em>: when the user presses the button, bring the event post-it note to the event handler.</li>
+<li class="fragment"><em>Event handler</em>: count the letters and write it in the DOM next to the text box.</li>
+</ul>
+</div>
+</section><section id="id2">
+<h3>Designing Page Behavior with only JavaScript: elegant?</h3>
+<p>(Cont.)</p>
+<p>Kind of. jQuery and JavaScript encourage imperative programming.</p>
+<div class="fragment container">
+<ul class="simple">
+<li>When some event happens, do something else.</li>
+</ul>
+</div>
+<div class="fragment container">
+<img alt="_images/computer-shoe.jpg" src="_images/computer-shoe.jpg" />
+</div>
+</section></section><section id="getting-acquainted-with-react-js">
+<section>
+<h2>Getting Acquainted with React.js</h2>
+</section><section id="react-js">
+<h3>React.js</h3>
+<a class="reference internal image-reference" href="_images/logo.png"><img alt="_images/logo.png" src="_images/logo.png" style="width: 50%;" /></a>
+</section><section id="component-lifecycles">
+<h3>Component lifecycles</h3>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">TextBox</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">createClass</span><span class="p">({</span>
+<span class="hll">    <span class="nx">getInitialState</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span>
+</span>        <span class="c1">// pass</span>
+<span class="hll">    <span class="p">},</span>
+</span><span class="hll">    <span class="nx">componentDidMount</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span>
+</span>        <span class="c1">// pass</span>
+<span class="hll">    <span class="p">},</span>
+</span><span class="hll">    <span class="nx">componentShouldUpdate</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span>
+</span>        <span class="c1">// pass</span>
+<span class="hll">    <span class="p">},</span>
+</span><span class="hll">    <span class="nx">render</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span>
+</span>        <span class="c1">// pass</span>
+<span class="hll">    <span class="p">}</span>
+</span><span class="p">});</span>
+</pre></div>
+</div>
+</section><section id="no-more-html-kind-of">
+<h3>No More HTML (kind of.)</h3>
+<div class="highlight-javascript"><div class="highlight"><pre>var TextBox = React.createClass({
+    getInitialState: function(){
+        // pass
+    },
+    componentDidMount: function(){
+        // pass
+    },
+    componentShouldUpdate: function(){
+        // pass
+    },
+<span class="hll">    render: function(){
+</span><span class="hll">        return (&lt;textarea&gt;&lt;/textarea&gt;);
+</span><span class="hll">    }
+</span>});
+</pre></div>
+</div>
+</section><section id="components-composed-of-other-components">
+<h3>Components Composed of Other Components</h3>
+<div class="compare container">
+<div class="highlight-javascript"><div class="highlight"><pre><span class="hll">var TextBox = React.createClass({
+</span>    getInitialState: function(){
+        // pass
+    },
+    componentDidMount: function(){
+        // pass
+    },
+    componentShouldUpdate: function(){
+        // pass
+    },
+    render: function() {
+        return (&lt;textarea rows=&quot;5&quot;&gt;
+                &lt;/textarea&gt;
+        );
+    }
+});
+</pre></div>
+</div>
+<div class="highlight-js"><div class="highlight"><pre>var MeggiesForm = React.createClass({
+    render: function(){
+        return (
+            &lt;div&gt;
+                &lt;p&gt;Howdy. Try typing in the text box below.&lt;/p&gt;
+<span class="hll">                &lt;TextBox /&gt;
+</span>            &lt;/div&gt;
+        );
+    }
+});
+</pre></div>
+</div>
+</div>
+</section><section id="components">
+<h3>Components</h3>
+<a class="reference internal image-reference" href="_images/not-mad.jpg"><img alt="_images/not-mad.jpg" src="_images/not-mad.jpg" style="width: 65%;" /></a>
+</section><section id="event-listeners-are-different">
+<h3>Event Listeners Are Different</h3>
+<div class="highlight-javascript"><div class="highlight"><pre>var TextBox = React.createClass({
+    getInitialState: function(){
+        count: 0
+    },
+    componentDidMount: function(){
+        // pass
+    },
+    componentShouldUpdate: function(){
+        // pass
+    },
+<span class="hll">    countChars: function(evt){
+</span><span class="hll">        var count = this.refs.input.value.length;
+</span><span class="hll">        this.setState(&#39;count&#39;, count);
+</span><span class="hll">    },
+</span>    render: function() {
+        return (&lt;textarea
+                    ref=&quot;input&quot;
+<span class="hll">                    onChange={this.countChars}
+</span>                    rows=&quot;5&quot;&gt;
+                &lt;/textarea&gt;
+                &lt;StatusDiv count={this.state.count} /&gt;
+        );
+    }
+});
+</pre></div>
+</div>
+</section><section id="event-listeners-and-state">
+<h3>Event Listeners and State</h3>
+<div class="highlight-javascript"><div class="highlight"><pre>var TextBox = React.createClass({
+<span class="hll">    getInitialState: function(){
+</span><span class="hll">        count: 0
+</span><span class="hll">    },
+</span>    componentDidMount: function(){
+        // pass
+    },
+    componentShouldUpdate: function(){
+        // pass
+    },
+    countChars: function(evt){
+        var count = this.refs.input.value.length;
+<span class="hll">        this.setState(&#39;count&#39;, count);
+</span>    },
+    render: function() {
+        return (&lt;textarea
+                    ref=&quot;input&quot;
+                    onChange={this.countChars}
+                    rows=&quot;5&quot;&gt;
+                &lt;/textarea&gt;
+<span class="hll">                &lt;StatusDiv count={this.state.count} /&gt;
+</span>        );
+    }
+});
+</pre></div>
+</div>
+</section><section id="react-is-quick">
+<h3>React is Quick.</h3>
+<p><cite>Audio Visualization Demo</cite> at <a class="reference external" href="http://localhost:8000/pronounce_gaelic/start">http://localhost:8000/pronounce_gaelic/start</a></p>
+</section><section id="react-is-quick-because-it-s-declarative">
+<h3>React is quick because it&#8217;s <em>declarative</em>.</h3>
+<div class="container">
+<ul class="simple">
+<li class="fragment">Declarative: <em>&#8220;I want to live in a world where the number next to the text box IS the number of letters in that text box.&#8221;</em></li>
+<li class="fragment">Imperative: <em>&#8220;When the user types in the text box, count the characters in the text box and then update the number next to the text box.&#8221;</em></li>
+</ul>
+</div>
+</section><section id="how-does-react-re-render-the-dom-so-quickly">
+<h3>How Does React Re-Render the DOM So Quickly?</h3>
+<p>Reconciliation Algorithm: generating the minimum number of operations to transform one tree into another</p>
+<div class="fragment container">
+<a class="reference internal image-reference" href="_images/ghost-dom.png"><img alt="_images/ghost-dom.png" src="_images/ghost-dom.png" style="width: 70%;" /></a>
+</div>
+</section><section id="gotchas">
+<h3>Gotchas</h3>
+<p>JSX gotchas</p>
+<div class="container">
+<ul class="simple">
+<li class="fragment"><code class="docutils literal"><span class="pre">/**</span> <span class="pre">&#64;jsx</span> <span class="pre">React.DOM</span> <span class="pre">*/</span></code> needs to be at the top of any file with React code (JSX) in it.</li>
+<li class="fragment">Add <code class="docutils literal"><span class="pre">type=&quot;text/jsx&quot;</span></code> to the <code class="docutils literal"><span class="pre">&lt;script&gt;</span></code> tag for any of YOUR JavaScript files that contain React code (JSX)</li>
+<li class="fragment">You can&#8217;t use <code class="docutils literal"><span class="pre">class=&quot;blah&quot;</span></code> in JSX because <code class="docutils literal"><span class="pre">class</span></code> is a reserved word in JavaScript. Use <code class="docutils literal"><span class="pre">className</span></code> instead.</li>
+</ul>
+</div>
+<p>Component Lifecycle gotchas</p>
+<div class="container">
+<ul class="simple">
+<li class="fragment"><code class="docutils literal"><span class="pre">componentDidMount</span></code> means the render function got called.</li>
+<li class="fragment">Always use this.setState to change a component&#8217;s state. Other than that function, state should be thought of as being immutable.</li>
+</ul>
+</div>
+</section><section id="react-js-isn-t-all-kittens-and-pizza">
+<h3>React.js isn&#8217;t all kittens and pizza.</h3>
+<a class="reference internal image-reference" href="_images/kitten-pizza.jpg"><img alt="_images/kitten-pizza.jpg" src="_images/kitten-pizza.jpg" style="width: 20%;" /></a>
+<div class="container">
+<ul>
+<li class="fragment"><p class="first">React is hard on designer workflows.</p>
+</li>
+<li class="fragment"><p class="first">JSX is hard to look at.</p>
+</li>
+<li class="fragment"><p class="first">The error messages are cryptic.</p>
+<blockquote>
+<div><ul class="simple">
+<li class="fragment">Facebook React developers, if you can hear me, please make this better.</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div>
+</section></section><section id="fef-patterns">
+<section>
+<h2>FEF Patterns</h2>
+</section><section id="id3">
+<h3>FEF Patterns</h3>
+<div class="container">
+<ul>
+<li class="fragment"><p class="first">Independent modules or units that have their own behaviors</p>
+</li>
+<li class="fragment"><p class="first">An interest in fewer &#8220;pages&#8221;</p>
+<blockquote>
+<div><ul class="simple">
+<li class="fragment">Single Page Applications</li>
+</ul>
+</div></blockquote>
+</li>
+<li class="fragment"><p class="first">Faster development and faster onboarding</p>
+</li>
+<li class="fragment"><p class="first">&#8220;Declarative is better than imperative.&#8221;</p>
+</li>
+<li class="fragment"><p class="first">HTML, CSS, Bootstrap, and JQuery are still welcome to the party</p>
+</li>
+<li class="fragment"><p class="first">&#8220;does the heavy lifting for you&#8221;.</p>
+</li>
+</ul>
+</div>
+</section></section><section id="resources-bibliography">
+<section>
+<h2>Resources/ bibliography</h2>
+</section><section id="resources">
+<h3>Resources</h3>
+<img alt="_images/react-book.png" src="_images/react-book.png" />
+</section><section id="other-resources">
+<h3>Other Resources</h3>
+<div class="container">
+<ul class="simple">
+<li class="fragment">AngularJS: Up and Running (by Shyam Seshadri and Brad Green)</li>
+<li class="fragment">React&#8217;s Reconciliation Algorithm: <a class="reference external" href="https://facebook.github.io/react/docs/reconciliation.html">https://facebook.github.io/react/docs/reconciliation.html</a></li>
+<li class="fragment">React Docs and Tutorials: <a class="reference external" href="https://facebook.github.io/react/docs/getting-started.html">https://facebook.github.io/react/docs/getting-started.html</a></li>
+</ul>
+</div>
+</section></section>
+
+
+  </div>
+</div>
+
+<script src="_static/revealjs/lib/js/head.min.js"></script>
+<script src="_static/revealjs/js/reveal.js"></script>
+<script>
+  Reveal.initialize({
+    maxScale: 5,
+    width: 1280,
+    height: 800,
+    dependencies: [
+          { src: "_static/revealjs/plugin/zoom-js/zoom.js", async: true },
+          { src: "_static/revealjs/plugin/notes/notes.js", async: true },
+    ]
+  });
+</script>
+
+</body>
+</html>

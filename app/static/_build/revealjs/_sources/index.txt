@@ -1,0 +1,392 @@
+==============================
+Front End Frameworks: But why?
+==============================
+
+Disclaimer
+==========
+
+A Disclaimer
+------------
+On learning your first JavaScript Framework
+
+.. container:: item-incremental
+    
+    - first know JavaScript
+    - first master a web framework
+    - don't try to do it in 1 day
+    - HB Fellows: probably don't do it for your Hackbright project
+
+JavaScript History
+==================
+
+A Storied Past
+--------------
+.. container:: item-incremental
+
+    - 1998-early 2000s JavaScript gets standardized for multiple browsers
+    - 2006- jQuery released, ends up winning the battle of the JS libraries for the timebeing
+
+Front End Frameworks Come on the Scene
+--------------------------------------
+
+.. image:: new-js-fw.png
+
+.. container:: item-incremental
+
+    * 2009- AngularJS (Brat Tech LLC, Google and community)
+    * 2010- Backbone (Jeremy Ashkenas)
+    * 2011- Ember.js (Yehuda Katz, Tom Dale, community)
+    * 2013- React.js (Facebook, Instagram, community)
+
+The Case for Front End Frameworks
+=================================
+
+Why FEFs Are Awesome, Apparently
+--------------------------------
+.. container:: item-incremental
+
+    * Easily testable
+    * More maintainable
+    * Safer
+    * Faster
+    * Easy on the eyes
+
+Designing an Application Without a Front End Framework
+======================================================
+
+Let's Talk About... 
+-------------------
+
+.. container:: item-incremental
+
+    * Database design
+    * Designing your controllers (a.k.a. *routes*)
+    * Designing web page's behavior with JavaScript
+
+Database Design - elegant?
+--------------------------
+.. container:: compare
+    
+    .. image:: database_schema.jpg
+        :width: 70%
+
+    .. image:: coco.jpg
+        :width: 20%
+
+Designing Your Controllers - elegant?
+-------------------------------------
+
+.. container:: one-incremental
+    
+    .. code-block:: python
+
+        @app.route('/submit')
+        def submit_form():
+            pass
+
+        @app.route('/process_form')
+        def process_profile():
+            pass
+
+        @app.route('/form')
+        def process_async_form():
+            pass
+
+Designing Your Controllers - elegant?
+-------------------------------------
+(Cont.)
+
+.. container:: compare
+
+    .. image:: audrey.jpg
+        :width: 15%
+
+    .. code-block:: python
+
+        @app.route('/users/<int:user_id>/save')
+        def create_user():
+            pass
+
+        @app.route('/users/<int:user_id>/profile')
+        def profile():
+            pass
+
+        @app.route('/save_profile')
+        def save_profile_async():
+            pass
+
+Designing Page Behavior with only JavaScript: elegant?
+------------------------------------------------------
+.. container:: item-incremental
+    
+    - `Live Demo`! A textbox that shows the character count when the user clicks a button.
+    - *User*: be the user of the web page.
+    - *Event listener*: when the user presses the button, bring the event post-it note to the event handler.
+    - *Event handler*: count the letters and write it in the DOM next to the text box. 
+
+Designing Page Behavior with only JavaScript: elegant?
+------------------------------------------------------
+(Cont.)
+
+Kind of. jQuery and JavaScript encourage imperative programming.
+
+.. container:: one-incremental
+
+    - When some event happens, do something else.
+
+.. container:: one-incremental
+
+    .. image:: computer-shoe.jpg
+
+
+Getting Acquainted with React.js
+================================
+
+React.js
+--------
+
+.. image:: logo.png
+    :width: 50%
+
+
+Component lifecycles
+--------------------
+
+.. code-block:: javascript
+    :emphasize-lines: 2,4,5,7,8,10,11,13
+
+    var TextBox = React.createClass({
+        getInitialState: function(){
+            // pass
+        },
+        componentDidMount: function(){
+            // pass
+        },
+        componentShouldUpdate: function(){
+            // pass
+        },
+        render: function(){
+            // pass
+        }
+    });
+
+No More HTML (kind of.)
+-----------------------
+
+.. code-block:: javascript
+    :emphasize-lines: 11-13
+
+    var TextBox = React.createClass({
+        getInitialState: function(){
+            // pass
+        },
+        componentDidMount: function(){
+            // pass
+        },
+        componentShouldUpdate: function(){
+            // pass
+        },
+        render: function(){
+            return (<textarea></textarea>);
+        }
+    });
+
+Components Composed of Other Components
+---------------------------------------
+
+.. container:: compare
+
+    .. code-block:: javascript
+        :emphasize-lines: 1
+
+        var TextBox = React.createClass({
+            getInitialState: function(){
+                // pass
+            },
+            componentDidMount: function(){
+                // pass
+            },
+            componentShouldUpdate: function(){
+                // pass
+            },
+            render: function() {
+                return (<textarea rows="5">
+                        </textarea>
+                );
+            }
+        });
+
+    .. code-block:: js
+        :emphasize-lines: 6
+
+        var MeggiesForm = React.createClass({
+            render: function(){
+                return (
+                    <div>
+                        <p>Howdy. Try typing in the text box below.</p>
+                        <TextBox />
+                    </div>
+                );   
+            }
+        });
+
+Components
+----------
+
+.. image:: not-mad.jpg
+    :width: 65%
+
+Event Listeners Are Different
+-----------------------------
+.. code-block:: javascript
+    :emphasize-lines: 11-14,18
+
+    var TextBox = React.createClass({
+        getInitialState: function(){
+            count: 0
+        },
+        componentDidMount: function(){
+            // pass
+        },
+        componentShouldUpdate: function(){
+            // pass
+        },
+        countChars: function(evt){
+            var count = this.refs.input.value.length;
+            this.setState('count', count);
+        },
+        render: function() {
+            return (<textarea 
+                        ref="input"
+                        onChange={this.countChars} 
+                        rows="5">
+                    </textarea>
+                    <StatusDiv count={this.state.count} />
+            );
+        }
+    });
+
+Event Listeners and State
+-------------------------
+
+.. code-block:: javascript
+    :emphasize-lines: 2-4,13,21
+
+    var TextBox = React.createClass({
+        getInitialState: function(){
+            count: 0
+        },
+        componentDidMount: function(){
+            // pass
+        },
+        componentShouldUpdate: function(){
+            // pass
+        },
+        countChars: function(evt){
+            var count = this.refs.input.value.length;
+            this.setState('count', count);
+        },
+        render: function() {
+            return (<textarea 
+                        ref="input"
+                        onChange={this.countChars} 
+                        rows="5">
+                    </textarea>
+                    <StatusDiv count={this.state.count} />
+            );
+        }
+    });
+
+
+React is Quick.
+---------------
+
+`Audio Visualization Demo` at http://localhost:8000/pronounce_gaelic/start
+
+React is quick because it's *declarative*.
+------------------------------------------
+
+.. container:: item-incremental
+
+    - Declarative: *"I want to live in a world where the number next to the text box IS the number of letters in that text box."*
+
+    - Imperative: *"When the user types in the text box, count the characters in the text box and then update the number next to the text box."*
+
+
+
+How Does React Re-Render the DOM So Quickly?
+--------------------------------------------
+Reconciliation Algorithm: generating the minimum number of operations to transform one tree into another
+
+.. container:: one-incremental
+
+    .. image:: ghost-dom.png
+        :width: 70%
+
+Gotchas
+-------
+
+JSX gotchas
+
+.. container:: item-incremental
+
+    - ``/** @jsx React.DOM */`` needs to be at the top of any file with React code (JSX) in it.
+    - Add ``type="text/jsx"`` to the ``<script>`` tag for any of YOUR JavaScript files that contain React code (JSX)
+    - You can't use ``class="blah"`` in JSX because ``class`` is a reserved word in JavaScript. Use ``className`` instead.
+
+Component Lifecycle gotchas    
+
+.. container:: item-incremental
+
+    - ``componentDidMount`` means the render function got called.
+    - Always use this.setState to change a component's state. Other than that function, state should be thought of as being immutable.
+    
+
+
+React.js isn't all kittens and pizza.
+-------------------------------------
+
+
+.. image:: kitten-pizza.jpg
+    :width: 20%
+
+.. container:: nest-incremental
+    
+    - React is hard on designer workflows.
+    - JSX is hard to look at.
+    - The error messages are cryptic.
+
+        - Facebook React developers, if you can hear me, please make this better.
+
+FEF Patterns
+============
+
+FEF Patterns
+------------
+.. container:: nest-incremental
+
+    * Independent modules or units that have their own behaviors
+    * An interest in fewer "pages"
+
+        * Single Page Applications
+    * Faster development and faster onboarding
+    * "Declarative is better than imperative."
+    * HTML, CSS, Bootstrap, and JQuery are still welcome to the party
+    * "does the heavy lifting for you". 
+
+
+Resources/ bibliography
+=======================
+
+Resources
+---------
+.. image:: react-book.png
+
+Other Resources
+---------------
+.. container:: nest-incremental
+
+    - AngularJS: Up and Running (by Shyam Seshadri and Brad Green)
+    - React's Reconciliation Algorithm: https://facebook.github.io/react/docs/reconciliation.html
+    - React Docs and Tutorials: https://facebook.github.io/react/docs/getting-started.html
+

@@ -13,4 +13,8 @@ def blog():
 @app.route('/projects')
 def projects():
 	return render_template("projects.html")
+
+@app.route('/fefs_talk')
+def fefs_talk():
+    return render_template("fefs_talk.html")
 	
