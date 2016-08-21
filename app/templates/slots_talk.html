@@ -1,0 +1,178 @@
+
+
+
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <!--<title>The Unbearable Heaviness of Being &mdash; Hackbright Fellowship</title>-->
+  <title>The Unbearable Heaviness of Being</title>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+  <link rel="stylesheet" href="/static/_build/revealjs/_static/revealjs/css/reveal.css"/>
+  <link rel="stylesheet" href="/static/slots/_static/revealjs/css/theme/white.css" id="theme"/>
+  <link rel="stylesheet" href="/static/slots/_static/pygments.css" type="text/css"/>
+  <link rel="stylesheet" href="/static/slots/_static/revealjs-hackbright.css"/>
+
+</head>
+<body>
+  <div class="reveal">
+
+    <footer id="slide-footer"></footer>
+
+    <div class="slides">
+      <section>
+        <h2>The Unbearable Heaviness of Being</h2>
+
+        <div class="event"></div>
+      </section>
+
+      
+  <section  ><section>
+<h2>About This Talk</h2>
+</section><section  ><h3>Me at PyCon This Year</h3>
+<img alt="_images/hansel.jpg" src="_images/hansel.jpg" />
+</section></section><section  ><section>
+<h2>Dictionaries</h2>
+</section><section  ><h3>Dictionaries</h3>
+<p>Fast, But Heavy</p>
+</section><section  ><h3>Dictionaries</h3>
+<div class="big highlight-python"><div class="highlight"><pre><span></span><span class="n">cat_facts</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;fur_color&quot;</span><span class="p">:</span> <span class="s2">&quot;black&quot;</span><span class="p">,</span>
+             <span class="s2">&quot;age&quot;</span><span class="p">:</span> <span class="mi">9</span><span class="p">,</span>
+             <span class="s2">&quot;napping&quot;</span><span class="p">:</span> <span class="bp">True</span><span class="p">}</span>
+
+<span class="c1"># ... other stuff</span>
+
+<span class="n">cat_facts</span><span class="p">[</span><span class="s1">&#39;chases_lasers&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="n">cat_facts</span><span class="p">[</span><span class="s1">&#39;hunting_for_mice&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+</pre></div>
+</div>
+<div class="container">
+<ul class="simple">
+<li class="fragment">Hash keys/values, store hash and what it points to</li>
+<li class="fragment">Providing direct access via hashing takes up space</li>
+<li class="fragment">Python makes more space for your dictionary as it grows in size</li>
+</ul>
+</div>
+</section></section><section  ><section>
+<h2>Objects</h2>
+</section><section  ><h3>They Store Their Attributes in Dictionaries</h3>
+<ul class="simple">
+<li>You can see instance attributes with <code class="docutils literal"><span class="pre">some_instance.__dict__</span></code></li>
+<li>Also class attributes with <code class="docutils literal"><span class="pre">SomeClassName.__dict__</span></code></li>
+</ul>
+</section><section  ><h3>Objects Store Their Attributes in Dictionaries</h3>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Cat</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A cat.&quot;&quot;&quot;</span>
+
+    <span class="n">species</span> <span class="o">=</span> <span class="s2">&quot;Cat&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fur_color</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fur_color</span> <span class="o">=</span> <span class="n">fur_color</span>
+
+    <span class="k">def</span> <span class="nf">hunt_for_mice</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hunting</span> <span class="o">=</span> <span class="bp">True</span>  <span class="c1"># a new attribute!</span>
+</pre></div>
+</div>
+<div class="fragment container">
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">princess</span> <span class="o">=</span> <span class="n">Cat</span><span class="p">(</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">princess</span><span class="o">.</span><span class="n">__dict__</span>
+<span class="go">{&#39;fur_color&#39;: &#39;black&#39;}</span>
+</pre></div>
+</div>
+</div>
+<div class="fragment container">
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Cat</span><span class="o">.</span><span class="n">__dict__</span>
+<span class="go">dict_proxy({&#39;__module__&#39;: &#39;__main__&#39;, &#39;hunt_for_mice&#39;:</span>
+<span class="go">&lt;function hunt_for_mice at 0x1101dbe60&gt;, &#39;species&#39;: &#39;Cat&#39;,</span>
+<span class="go">&#39;__dict__&#39;: &lt;attribute &#39;__dict__&#39; of &#39;Cat&#39; objects&gt;,</span>
+<span class="go">&#39;__weakref__&#39;: &lt;attribute &#39;__weakref__&#39; of &#39;Cat&#39; objects&gt;,</span>
+<span class="go">&#39;__doc__&#39;: &#39;A cat.&#39;, &#39;__init__&#39;: &lt;function __init__ at 0x1101dbde8&gt;})</span>
+</pre></div>
+</div>
+</div>
+</section><section  ><h3>When is this not cool?</h3>
+<p>It&#8217;s like living in a mansion when you only <span class="raw-reveal"><br></span>
+have enough furniture for a one bedroom apartment.</p>
+</section></section><section  ><section>
+<h2><code class="docutils literal"><span class="pre">__slots__</span></code></h2>
+</section><section  ><h3>Using <code class="docutils literal"><span class="pre">__slots__</span></code> with our Cat</h3>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">FurCat</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A lighter cat.&quot;&quot;&quot;</span>
+
+    <span class="n">__slots__</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;fur_color&#39;</span><span class="p">)</span>
+
+    <span class="n">species</span> <span class="o">=</span> <span class="s2">&quot;Cat&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fur_color</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fur_color</span> <span class="o">=</span> <span class="n">fur_color</span>
+
+    <span class="k">def</span> <span class="nf">hunt_for_mice</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hunting</span> <span class="o">=</span> <span class="bp">True</span>  <span class="c1"># AttributeError!</span>
+</pre></div>
+</div>
+</section><section  ><h3>Why use <code class="docutils literal"><span class="pre">__slots__</span></code>?</h3>
+<div class="fragment container">
+<p>When you don&#8217;t want to internally store instance <span class="raw-reveal"><br></span>
+attributes as a dictionary.</p>
+</div>
+<div class="fragment container">
+<p><em>... okay ... so when do you want to do that?</em></p>
+</div>
+<div class="fragment container">
+<p>When you know your object will need only a <span class="raw-reveal"><br></span>
+particular set of instance attributes,  <span class="raw-reveal"><br></span>
+and no more than that in its lifetime. <span class="raw-reveal"><br></span></p>
+</div>
+</section><section  ><h3>Warning: Premature Optimization</h3>
+<blockquote>
+<div>&#8220;Don’t prematurely optimize and use this everywhere!
+[...]it really only saves you when you have <strong>thousands</strong>
+of instances.&#8221;</div></blockquote>
+<ul class="simple">
+<li>Ben Hoyt (<a class="reference external" href="http://tech.oyster.com/save-ram-with-python-slots/">http://tech.oyster.com/save-ram-with-python-slots/</a>)</li>
+</ul>
+</section><section  ><h3>Warning: Inheritance</h3>
+<p>Children of parent classes that use <code class="docutils literal"><span class="pre">__slots__</span></code> also
+can&#8217;t add instance attributes.</p>
+</section></section><section  ><section>
+<h2>Thanks</h2>
+</section><section  ><h3>Me</h3>
+<p>I teach at Hackbright Academy, a software engineering bootcamp for women.</p>
+<img alt="_images/teaching.jpg" src="_images/teaching.jpg" style="width: 50%;" />
+<div class="fragment container">
+<ul class="simple">
+<li>Twitter: &#64;megthedeveloper</li>
+<li>Email: <a class="reference external" href="mailto:mmm25eg&#37;&#52;&#48;gmail&#46;com">mmm25eg<span>&#64;</span>gmail<span>&#46;</span>com</a></li>
+<li><a class="reference external" href="https://hackbrightacademy.com">https://hackbrightacademy.com</a></li>
+</ul>
+</div>
+</section></section>
+
+
+    </div>
+  </div>
+<script src="/static/_build/revealjs/_static/revealjs/lib/js/head.min.js"></script>
+<script src="/static/_build/revealjs/_static/revealjs/js/reveal.js"></script>
+<script>
+  Reveal.initialize({
+    maxScale: 5,
+    width: 1280,
+    height: 800,
+    transition: 'slide',
+    dependencies: [
+      {src: "_static/revealjs/plugin/notes/notes.js", async: true},
+    ]
+  });
+  // External links should open in new window
+  var externalLinks = document.getElementsByClassName("external");
+  for (var i = 0; i < externalLinks.length; i++)
+    externalLinks[i].setAttribute('target', '_blank');
+</script>
+
+</body>
+</html>

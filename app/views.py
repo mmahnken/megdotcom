@@ -17,4 +17,8 @@ def projects():
 @app.route('/fefs_talk')
 def fefs_talk():
     return render_template("fefs_talk.html")
+
+@app.route('/slots_talk')
+def slots_talk():
+    return render_template("slots_talk.html")
 	
