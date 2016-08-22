@@ -1,8 +1,9 @@
-from flask import render_template, flash, redirect, session, url_for, request, g 
-from app import app
+from flask import Flask, render_template, flash, redirect, session, url_for, request, g 
+import os
+
+app = Flask(__name__)
 
 @app.route('/')
-@app.route('/index')
 def index():
 	return render_template("index.html")
 
@@ -21,4 +22,7 @@ def fefs_talk():
 @app.route('/slots_talk')
 def slots_talk():
     return render_template("slots_talk.html")
-	
+
+if __name__ == "__main__":
+    port = int(os.environ.get('PORT', 5000))
+    app.run(port=port)
