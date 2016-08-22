@@ -13,7 +13,7 @@
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
-  <link rel="stylesheet" href="/static/_build/revealjs/_static/revealjs/css/reveal.css"/>
+  <link rel="stylesheet" href="/static/slots/_static/revealjs/css/reveal.css"/>
   <link rel="stylesheet" href="/static/slots/_static/revealjs/css/theme/white.css" id="theme"/>
   <link rel="stylesheet" href="/static/slots/_static/pygments.css" type="text/css"/>
   <link rel="stylesheet" href="/static/slots/_static/revealjs-hackbright.css"/>
@@ -35,7 +35,7 @@
   <section  ><section>
 <h2>About This Talk</h2>
 </section><section  ><h3>Me at PyCon This Year</h3>
-<img alt="_images/hansel.jpg" src="_images/hansel.jpg" />
+<img alt="/static/slots/_images/hansel.jpg" src="/static/slots/_images/hansel.jpg" />
 </section></section><section  ><section>
 <h2>Dictionaries</h2>
 </section><section  ><h3>Dictionaries</h3>
@@ -104,7 +104,7 @@ have enough furniture for a one bedroom apartment.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">FurCat</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;A lighter cat.&quot;&quot;&quot;</span>
 
-    <span class="n">__slots__</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;fur_color&#39;</span><span class="p">)</span>
+    <span class="n">__slots__</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;fur_color&#39;</span><span class="p">,)</span>
 
     <span class="n">species</span> <span class="o">=</span> <span class="s2">&quot;Cat&quot;</span>
 
@@ -137,13 +137,13 @@ of instances.&#8221;</div></blockquote>
 <li>Ben Hoyt (<a class="reference external" href="http://tech.oyster.com/save-ram-with-python-slots/">http://tech.oyster.com/save-ram-with-python-slots/</a>)</li>
 </ul>
 </section><section  ><h3>Warning: Inheritance</h3>
-<p>Children of parent classes that use <code class="docutils literal"><span class="pre">__slots__</span></code> also
-can&#8217;t add instance attributes.</p>
+<p>Children of parent classes that have <code class="docutils literal"><span class="pre">__slots__</span></code> <span class="raw-reveal"><br></span>
+also can&#8217;t add instance attributes.</p>
 </section></section><section  ><section>
 <h2>Thanks</h2>
 </section><section  ><h3>Me</h3>
 <p>I teach at Hackbright Academy, a software engineering bootcamp for women.</p>
-<img alt="_images/teaching.jpg" src="_images/teaching.jpg" style="width: 50%;" />
+<img alt="_images/teaching.jpg" src="/static/slots/_images/teaching.jpg" style="width: 50%;" />
 <div class="fragment container">
 <ul class="simple">
 <li>Twitter: &#64;megthedeveloper</li>
@@ -156,8 +156,9 @@ can&#8217;t add instance attributes.</p>
 
     </div>
   </div>
-<script src="/static/_build/revealjs/_static/revealjs/lib/js/head.min.js"></script>
-<script src="/static/_build/revealjs/_static/revealjs/js/reveal.js"></script>
+
+<script src="/static/slots/_static/revealjs/lib/js/head.min.js"></script>
+<script src="/static/slots/_static/revealjs/js/reveal.js"></script>
 <script>
   Reveal.initialize({
     maxScale: 5,
