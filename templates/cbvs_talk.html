@@ -1,0 +1,319 @@
+
+
+
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <!--<title>Class-Based Views in Django &mdash; Hackbright Fellowship</title>-->
+  <title>Class-Based Views in Django</title>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+  <link rel="stylesheet" href="_static/revealjs/css/reveal.css"/>
+  <link rel="stylesheet" href="_static/revealjs/css/theme/white.css" id="theme"/>
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css"/>
+  <link rel="stylesheet" href="_static/revealjs-hackbright.css"/>
+
+</head>
+<body>
+  <div class="reveal">
+
+    <footer id="slide-footer"></footer>
+
+    <div class="slides">
+      <section>
+        <h2>Class-Based Views in Django</h2>
+
+        <div class="event"></div>
+      </section>
+
+      
+  <section  ><section>
+<h2>Views</h2>
+</section><section  ><h3>Views</h3>
+<ul class="simple">
+<li>code for turning a request into a response</li>
+<li>in Flask, they are functions</li>
+<li>in Django, they are functions OR classes</li>
+</ul>
+</section><section  ><h3>From the Django tutorial, part 3</h3>
+<p>A Function-Based view</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django.http</span> <span class="kn">import</span> <span class="n">HttpResponse</span>
+
+<span class="kn">from</span> <span class="nn">.models</span> <span class="kn">import</span> <span class="n">Question</span>
+
+
+<span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="n">latest_question_list</span> <span class="o">=</span> <span class="n">Question</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s1">&#39;-pub_date&#39;</span><span class="p">)[:</span><span class="mi">5</span><span class="p">]</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">q</span><span class="o">.</span><span class="n">question_text</span> <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">latest_question_list</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><a class="reference external" href="https://docs.djangoproject.com/en/1.11/intro/tutorial03/">Source</a></p>
+</section><section  ><h3>From the Django tutorial, part 4</h3>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django.views</span> <span class="kn">import</span> <span class="n">generic</span>
+<span class="c1">#...</span>
+
+<span class="kn">from</span> <span class="nn">.models</span> <span class="kn">import</span> <span class="n">Question</span>
+
+
+<span class="k">class</span> <span class="nc">IndexView</span><span class="p">(</span><span class="n">generic</span><span class="o">.</span><span class="n">ListView</span><span class="p">):</span>
+    <span class="n">template_name</span> <span class="o">=</span> <span class="s1">&#39;polls/index.html&#39;</span>
+    <span class="n">context_object_name</span> <span class="o">=</span> <span class="s1">&#39;latest_question_list&#39;</span>
+
+    <span class="k">def</span> <span class="nf">get_queryset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the last five published questions.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">Question</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s1">&#39;-pub_date&#39;</span><span class="p">)[:</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django.conf.urls</span> <span class="kn">import</span> <span class="n">url</span>
+
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">views</span>
+
+<span class="n">app_name</span> <span class="o">=</span> <span class="s1">&#39;polls&#39;</span>
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">url</span><span class="p">(</span><span class="s1">r&#39;^$&#39;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">IndexView</span><span class="o">.</span><span class="n">as_view</span><span class="p">(),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;index&#39;</span><span class="p">),</span>
+    <span class="c1">#...</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p><a class="reference external" href="https://docs.djangoproject.com/en/1.11/intro/tutorial04/">Source</a></p>
+</section><section  ><h3>Why CBVs</h3>
+<p>In Django 1.4... (End of support Feb. 2013)</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">show_list</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">slug</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+              <span class="n">template_name</span><span class="o">=</span><span class="s1">&#39;podcast/show_list.html&#39;</span><span class="p">,</span>
+              <span class="n">page</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">paginate_by</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">mimetype</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Episode list</span>
+<span class="sd">    ...</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">slug</span><span class="p">:</span>
+        <span class="n">shows</span> <span class="o">=</span> <span class="n">Show</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">slug__exact</span><span class="o">=</span><span class="n">slug</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">shows</span> <span class="o">=</span> <span class="n">Show</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">object_list</span><span class="p">(</span>
+        <span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">,</span>
+        <span class="n">queryset</span><span class="o">=</span><span class="n">shows</span><span class="p">,</span>
+        <span class="n">template_name</span><span class="o">=</span><span class="n">template_name</span><span class="p">,</span>
+        <span class="n">paginate_by</span><span class="o">=</span><span class="n">paginate_by</span><span class="p">,</span>
+        <span class="n">page</span><span class="o">=</span><span class="n">page</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><a class="reference external" href="http://www.programcreek.com/python/example/60520/django.views.generic.list_detail.object_list">Source</a></p>
+</section><section  ><h3>Why CBVs</h3>
+<p>Also from Django 1.4... (End of support Feb. 2013)</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">recipe_list</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">queryset</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="n">recipes</span> <span class="o">=</span> <span class="n">queryset</span>
+    <span class="nb">filter</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">GET</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">GET</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="s1">&#39;categoria&#39;</span><span class="p">):</span>
+            <span class="nb">filter</span> <span class="o">=</span> <span class="n">Category</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">slug</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;categoria&#39;</span><span class="p">))</span>
+            <span class="n">recipes</span> <span class="o">=</span> <span class="n">recipes</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">categories</span><span class="o">=</span><span class="nb">filter</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">data</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="s1">&#39;tipo&#39;</span><span class="p">):</span>
+            <span class="nb">filter</span> <span class="o">=</span> <span class="n">Meal</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">slug</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;tipo&#39;</span><span class="p">))</span>
+            <span class="n">recipes</span> <span class="o">=</span> <span class="n">recipes</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">meals</span><span class="o">=</span><span class="nb">filter</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">recipes</span> <span class="o">=</span> <span class="n">recipes</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s1">&#39;-id&#39;</span><span class="p">)[:</span><span class="mi">12</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">object_list</span><span class="p">(</span><span class="n">request</span><span class="p">,</span><span class="n">queryset</span><span class="o">=</span><span class="n">recipes</span><span class="p">,</span><span class="n">extra_context</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;filter&#39;</span><span class="p">:</span><span class="nb">filter</span><span class="p">})</span>
+</pre></div>
+</div>
+<p><a class="reference external" href="http://www.programcreek.com/python/example/60520/django.views.generic.list_detail.object_list">Source</a></p>
+</section><section  ><h3>Problems with Function-Based Views</h3>
+<ul class="simple">
+<li>repetitive &#8211; not DRY</li>
+<li>monolithic (a.k.a. not modular, can&#8217;t be broken out and reused)</li>
+<li>lots of conditional view logic</li>
+<li>so many keyword arguments</li>
+</ul>
+</section></section><section  ><section>
+<h2>CBVs and generic.ListView</h2>
+</section><section  ><h3>CBVs</h3>
+<ul class="simple">
+<li>your view logic can be modular, object-oriented</li>
+<li>Django generic views are modular, object-oriented</li>
+</ul>
+</section><section  ><h3>Lectures List</h3>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">LectureSessionListView</span><span class="p">(</span><span class="n">DynamicCohortMixin</span><span class="p">,</span> <span class="n">CurriculumBreadcrumbsMixin</span><span class="p">,</span>
+                             <span class="n">FrodoHeadlineMixin</span><span class="p">,</span> <span class="n">generic</span><span class="o">.</span><span class="n">ListView</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;List of all lecture sessions for a particular cohort.&quot;&quot;&quot;</span>
+
+    <span class="n">template_name</span> <span class="o">=</span> <span class="s2">&quot;curriculum/lecturesession_list.html&quot;</span>
+    <span class="n">headline</span> <span class="o">=</span> <span class="s2">&quot;Lectures&quot;</span>
+
+    <span class="k">def</span> <span class="nf">get_queryset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get list of published lecture sessions for this semester.&quot;&quot;&quot;</span>
+        <span class="n">cohort</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_cohort</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="p">(</span><span class="n">LectureSession</span>
+                <span class="o">.</span><span class="n">published</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">cohort</span><span class="o">=</span><span class="n">cohort</span><span class="p">)</span>
+                <span class="o">.</span><span class="n">select_related</span><span class="p">(</span><span class="s1">&#39;lecture&#39;</span><span class="p">,</span> <span class="s1">&#39;cohort&#39;</span><span class="p">)</span>
+                <span class="o">.</span><span class="n">prefetch_related</span><span class="p">(</span><span class="s1">&#39;staff&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s1">&#39;start_at&#39;</span><span class="p">)</span>
+                <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django.conf.urls</span> <span class="kn">import</span> <span class="n">url</span>
+<span class="kn">from</span> <span class="nn">views</span> <span class="kn">import</span> <span class="n">lectures</span>
+
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>  <span class="c1">#...</span>
+        <span class="n">url</span><span class="p">(</span><span class="s1">r&#39;^lectures/$&#39;</span><span class="p">,</span> <span class="n">lectures</span><span class="o">.</span><span class="n">LectureSessionListView</span><span class="o">.</span><span class="n">as_view</span><span class="p">(),</span>
+            <span class="n">name</span><span class="o">=</span><span class="s1">&#39;cohort_lectures&#39;</span><span class="p">),</span>   <span class="c1">#...</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</section><section  ><h3>from Django: <strong>generic.ListView</strong></h3>
+<p>Inherits from:</p>
+<ul class="simple">
+<li>MultipleObjectTemplateResponseMixin</li>
+<li>TemplateResponseMixin</li>
+<li>BaseListView</li>
+<li>MultipleObjectMixin</li>
+<li>ContextMixin</li>
+<li>View</li>
+</ul>
+</section><section  ><h3>from Django: generic.ListView</h3>
+<p>Allows you to:</p>
+<div class="container">
+<ul class="simple">
+<li class="fragment">Associate a template with the view<ul>
+<li>class attribute <strong>template_name</strong> or method <strong>get_template_names</strong></li>
+</ul>
+</li>
+<li class="fragment">Specify a set of DB objects to render and make available in the template<ul>
+<li>class attribute <strong>queryset</strong> or method <strong>get_queryset</strong></li>
+</ul>
+</li>
+<li class="fragment">Specify other things to make available in the template<ul>
+<li>method <strong>get_context_data</strong></li>
+</ul>
+</li>
+<li class="fragment">Other boring things like handling an HTTP request, making sure the request
+method is allowed, etc.</li>
+</ul>
+</div>
+</section><section  ><h3>from Frodo source: <strong>BreadcrumbsMixin</strong></h3>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">BreadcrumbsMixin</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="sd">&quot;&quot;&quot;Provide breadcrumbs to curriculum views.</span>
+
+<span class="sd">Things that use this must also the the SetHeadlineMixin.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="c1">#...</span>
+
+<span class="k">def</span> <span class="nf">get_context_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="n">context</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">BreadcrumbsMixin</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">get_context_data</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="n">context</span><span class="p">[</span><span class="s1">&#39;breadcrumbs&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">get_breadcrumbs_root</span><span class="p">()</span>
+        <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_breadcrumbs_parents</span><span class="p">()</span>
+        <span class="o">+</span> <span class="p">[{</span><span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_breadcrumb_headline</span><span class="p">()}]</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">context</span>
+</pre></div>
+</div>
+</section></section><section  ><section>
+<h2>Other Generic Views to Know</h2>
+</section><section  ><h3>generic.TemplateView</h3>
+<ul class="simple">
+<li>parents are <strong>TemplateResponseMixin</strong>, <strong>ContextMixin</strong>, and <strong>View</strong></li>
+<li>best match to a flask route function</li>
+<li>can process a request (from <strong>View</strong>)</li>
+<li>can pass data to the template via <strong>get_context_data</strong> (from <strong>ContextMixin</strong>)</li>
+<li>can be associated with a particular template (from <strong>TemplateResponseMixin</strong>)<ul>
+<li>so, you can define class attribute <strong>template_name</strong> or method
+<strong>get_template_names</strong></li>
+</ul>
+</li>
+</ul>
+</section><section  ><h3>generic.DetailView</h3>
+<ul class="simple">
+<li>ListView&#8217;s more specific sister</li>
+<li>inherits from<ul>
+<li>SingleObjectTemplateResponseMixin</li>
+<li>TemplateResponseMixin</li>
+<li>BaseDetailView</li>
+<li>SingleObjectMixin</li>
+<li>ContextMixin</li>
+<li>View</li>
+</ul>
+</li>
+<li>still has a queryset (attribute or method), but looks for a primary key
+query parameter from the request</li>
+</ul>
+</section><section  ><h3>generic.CreateView</h3>
+<ul class="simple">
+<li>with a Django form class, you can very easily allow users to create
+DB objects</li>
+<li>a great example of polymorphism</li>
+<li>relatedly, there is <strong>generic.UpdateView</strong></li>
+</ul>
+</section><section  ><h3>generic.CreateView</h3>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">NotebookCreateForm</span><span class="p">(</span><span class="n">forms</span><span class="o">.</span><span class="n">ModelForm</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A form to create a notebook and all the drawings in it.&quot;&quot;&quot;</span>
+
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">Notebook</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;description&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;drawn_at&#39;</span><span class="p">]</span>
+        <span class="n">widgets</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;drawn_at&#39;</span><span class="p">:</span> <span class="n">widgets</span><span class="o">.</span><span class="n">MonthYearWidget</span><span class="p">(</span><span class="n">years</span><span class="o">=</span><span class="nb">xrange</span><span class="p">(</span><span class="mi">1980</span><span class="p">,</span><span class="mi">2050</span><span class="p">)),</span>
+        <span class="p">}</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">NotebookCreateView</span><span class="p">(</span><span class="n">generic</span><span class="o">.</span><span class="n">CreateView</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Add a notebook and all of its drawings in one go.&quot;&quot;&quot;</span>
+
+    <span class="n">model</span> <span class="o">=</span> <span class="n">Notebook</span>
+    <span class="n">form_class</span> <span class="o">=</span> <span class="n">NotebookCreateForm</span>
+    <span class="n">template_name</span> <span class="o">=</span> <span class="s1">&#39;drawings/notebook_create.html&#39;</span>
+    <span class="n">headline</span> <span class="o">=</span> <span class="s2">&quot;Upload a Notebook&quot;</span>
+
+    <span class="n">form_invalid_message</span> <span class="o">=</span> <span class="s2">&quot;Please correct the error(s).&quot;</span>
+    <span class="n">form_valid_message</span> <span class="o">=</span> <span class="s2">&quot;Information saved.&quot;</span>
+
+    <span class="c1"># &quot;if everything worked out that should have&quot;</span>
+    <span class="k">def</span> <span class="nf">form_valid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">form</span><span class="p">):</span>
+        <span class="c1"># can add addl logic here</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">NotebookCreateView</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">form_valid</span><span class="p">(</span><span class="n">form</span><span class="p">)</span>
+</pre></div>
+</div>
+</section></section><section  ><section>
+<h2>Conclusion</h2>
+</section><section  ><h3>Conclusion</h3>
+<p>Class-based views are classy as hell.</p>
+</section><section  ><h3>Resources</h3>
+<p><a class="reference external" href="https://ccbv.co.uk/">CCBV</a></p>
+<p><a class="reference external" href="https://docs.djangoproject.com/en/1.11/intro/tutorial03/">The Official Django Tutorial, Part 3</a></p>
+</section></section>
+
+
+    </div>
+  </div>
+
+<script src="_static/revealjs/lib/js/head.min.js"></script>
+<script src="_static/revealjs/js/reveal.js"></script>
+<script>
+  Reveal.initialize({
+    maxScale: 5,
+    width: 1280,
+    height: 800,
+    transition: 'slide',
+    dependencies: [
+      {src: "_static/revealjs/plugin/notes/notes.js", async: true},
+    ]
+  });
+  // External links should open in new window
+  var externalLinks = document.getElementsByClassName("external");
+  for (var i = 0; i < externalLinks.length; i++)
+    externalLinks[i].setAttribute('target', '_blank');
+</script>
+
+</body>
+</html>

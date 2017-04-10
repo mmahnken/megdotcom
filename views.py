@@ -23,6 +23,10 @@ def fefs_talk():
 def slots_talk():
     return render_template("slots_talk.html")
 
+@app.route('/cbvs_talk')
+def slots_talk():
+    return render_template("cbvs_talk.html")
+
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
     app.run(host="0.0.0.0", port=port)
