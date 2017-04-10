@@ -24,7 +24,7 @@ def slots_talk():
     return render_template("slots_talk.html")
 
 @app.route('/cbvs_talk')
-def slots_talk():
+def cbvs_talk():
     return render_template("cbvs_talk.html")
 
 if __name__ == "__main__":
