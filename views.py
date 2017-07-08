@@ -27,6 +27,10 @@ def slots_talk():
 def cbvs_talk():
     return render_template("cbvs_talk.html")
 
+@app.route('/h4h')
+def h4h_talk():
+    return render_template("hackathon-humanity-talk.html")
+
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
     app.run(host="0.0.0.0", port=port)

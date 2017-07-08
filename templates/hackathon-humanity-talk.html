@@ -1,0 +1,230 @@
+
+
+
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <!--<title>Hacking 101 &mdash; Hackbright Fellowship</title>-->
+  <title>Hacking 101</title>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+  <link rel="stylesheet" href="/static/hackbright/_static/revealjs/css/reveal.css"/>
+  <link rel="stylesheet" href="/static/hackbright/_static/revealjs/css/theme/white.css" id="theme"/>
+  <link rel="stylesheet" href="/static/hackbright/_static/pygments.css" type="text/css"/>
+  <link rel="stylesheet" href="/static/hackbright/_static/revealjs-hackbright.css"/>
+
+</head>
+<body>
+  <div class="reveal">
+
+    <footer id="slide-footer"></footer>
+
+    <div class="slides">
+      <section>
+        <h2>Hacking 101</h2>
+
+        <div class="event"></div>
+      </section>
+
+      
+  <section  ><section>
+<h2>Hacking 101</h2>
+</section><section  ><h3>Hacking 101</h3>
+<blockquote>
+<div><p>Hacking for Humanity, July 8, 2017</p>
+<p>Meggie Mahnken and Bonnie Schulkin</p>
+<p><strong>Hackbright Academy</strong></p>
+</div></blockquote>
+</section></section><section  ><section>
+<h2>Hacking</h2>
+</section><section  ><h3>Hacking</h3>
+<p>You might be imagining something like this...</p>
+<img alt="hacker.jpg" src="/static/hackbright/_images/hacker.jpg" style="width: 75%;" />
+</section><section  ><h3>Hacking</h3>
+<p>Nowadays, closer to this...</p>
+<img alt="new-hacker.jpg" src="/static/hackbright/_images/new-hacker.jpg" style="width: 65%;" />
+</section><section  ><h3>Hacker Ethic</h3>
+<ul class="simple">
+<li>Access</li>
+<li>Freedom of information</li>
+<li>Improvement to quality of life</li>
+</ul>
+<p>Source: Steven Levy, <em>Hackers: Heroes of the Computer Revolution</em></p>
+</section></section><section  ><section>
+<h2>The Basics</h2>
+</section><section  ><h3>So you came to a hackathon...</h3>
+<p>What now?</p>
+<div class="docutils container">
+<ul class="simple">
+<li class="fragment">Figure out a problem to solve</li>
+<li class="fragment">Choose a data source</li>
+<li class="fragment">Decide on technology</li>
+</ul>
+</div>
+</section><section  ><h3>So you came to a hackathon...</h3>
+<div class="docutils container">
+<ul class="simple">
+<li class="fragment">Draw the user flow<ul>
+<li>Think big, start small</li>
+</ul>
+</li>
+<li class="fragment">Break up into tasks and distribute<ul>
+<li>New to hacking? Pair program!</li>
+</ul>
+</li>
+<li class="fragment">Code!</li>
+</ul>
+</div>
+</section></section><section  ><section>
+<h2>Example Applications</h2>
+</section><section  ><h3>Example Applications</h3>
+<ul class="simple">
+<li><strong>Nearest Food Shelter</strong> using Web Scraping</li>
+<li><strong>Confidence on Demand</strong> using Twilio API</li>
+<li><a class="reference external" href="https://github.com/flyrightsister/h4h_2017">https://github.com/flyrightsister/h4h_2017</a></li>
+</ul>
+</section><section  ><h3>Nearest Food Shelter: Overview</h3>
+<img alt="_images/food.png" src="/static/hackbright/_images/food.png" />
+</section><section  ><h3>Nearest Food Shelter: Overview</h3>
+<img alt="_images/food2.png" src="/static/hackbright/_images/food2.png" />
+</section><section  ><h3>Nearest Food Shelter: Overview</h3>
+<ul class="simple">
+<li>User can input their address, find nearest SF food shelter</li>
+<li>Python / Flask app</li>
+</ul>
+</section><section  ><h3>Overall Process</h3>
+<ul class="simple">
+<li><strong>Web scraping</strong> to get a list of SF Homeless shelters<ul>
+<li>Use the <strong>Google Places API</strong> to get addresses for each shelter</li>
+</ul>
+</li>
+<li>User provides their address via a <strong>web form</strong></li>
+<li><strong>Google Distance Matrix API</strong> to find nearest shelter</li>
+</ul>
+</section><section  ><h3>Web Scraping</h3>
+<div class="docutils container">
+<ul class="simple">
+<li class="fragment">Programmatically collect data from web pages</li>
+<li class="fragment">Use cases<ul>
+<li class="fragment">Avoiding lots of copying/pasting</li>
+<li class="fragment">Seeding a database with real data</li>
+<li class="fragment">Collecting lots of data from same web page over time</li>
+</ul>
+</li>
+<li class="fragment">Warning: Terms of Use, Service Agreements, etc.<ul>
+<li class="fragment">Good resource: <a class="reference external" href="http://www.storybench.org/to-scrape-or-not-to-scrape-the-technical-and-ethical-challenges-of-collecting-data-off-the-web/">To Scrape or Not To Scrape</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section><section  ><h3>Web Scraping</h3>
+<img alt="_images/shelters.png" src="/static/hackbright/_images/shelters.png" />
+</section><section  ><h3>Web Scraping</h3>
+<ul class="simple">
+<li>Install <code class="docutils literal"><span class="pre">requests</span></code> package to make web requests in Python</li>
+<li>Install <code class="docutils literal"><span class="pre">BeautifulSoup</span></code> package to parse an HTML webpage</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_soup</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+  <span class="sd">&quot;&quot;&quot;Request webpage and return a Beautiful Soup object.&quot;&quot;&quot;</span>
+
+  <span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+  <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">soup</span>
+
+<span class="k">def</span> <span class="nf">get_resource_names</span><span class="p">(</span><span class="n">webpage_soup</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Get food urls from a homelessness resources webpage.&quot;&quot;&quot;</span>
+
+    <span class="n">holding_div</span> <span class="o">=</span> <span class="n">webpage_soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span><span class="s1">&#39;mw-content-ltr&#39;</span><span class="p">})</span>
+    <span class="n">all_food_links</span> <span class="o">=</span> <span class="n">holding_div</span><span class="o">.</span><span class="n">findAll</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)</span>
+    <span class="n">names</span> <span class="o">=</span> <span class="p">[</span> <span class="n">a</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">all_food_links</span> <span class="p">]</span>
+    <span class="k">return</span> <span class="n">names</span>
+</pre></div>
+</div>
+</section><section  ><h3>Confidence on Demand: Overview</h3>
+<img alt="_images/confidence_on_demand.png" src="/static/hackbright/_images/confidence_on_demand.png" />
+</section><section  ><h3>Confidence on Demand: Overview</h3>
+<ul class="simple">
+<li>Send confidence-boosting SMS messages via Twilio API</li>
+<li>Python / Flask app</li>
+<li>Simple HTML / CSS front end</li>
+</ul>
+</section><section  ><h3>The Background</h3>
+<ul class="simple">
+<li>Data: google search <cite>confidence boosting quotes</cite><ul>
+<li>Copy from websites and store in Python list</li>
+</ul>
+</li>
+<li>User flow: User clicks button and receives text</li>
+</ul>
+</section><section  ><h3>The Flask App</h3>
+<ul class="simple">
+<li>One template:<ul>
+<li>home page with form / button</li>
+</ul>
+</li>
+<li>Two routes:<ul>
+<li>display home page</li>
+<li>process form</li>
+</ul>
+</li>
+</ul>
+</section><section  ><h3>The Twilio API</h3>
+<ul>
+<li><p class="first">Get Twilio account for credentials</p>
+<ul class="simple">
+<li><a class="reference external" href="https://www.twilio.com/try-twilio">https://www.twilio.com/try-twilio</a></li>
+</ul>
+</li>
+<li><p class="first">Use Python wrapper</p>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/twilio/twilio-python">https://github.com/twilio/twilio-python</a></li>
+</ul>
+</li>
+<li><p class="first">Calling Twilio:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">twilio.rest</span> <span class="kn">import</span> <span class="n">Client</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">()</span>
+
+<span class="o">...</span>
+
+<span class="n">message</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">messages</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+    <span class="n">to</span><span class="o">=</span><span class="n">phone</span><span class="p">,</span>
+    <span class="n">from_</span><span class="o">=</span><span class="n">FROM_PHONE</span><span class="p">,</span>
+    <span class="n">body</span><span class="o">=</span><span class="n">msg</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section><section  ><h3>Now it&#8217;s Your Turn!</h3>
+<img alt="_images/computer-cat.gif" src="/static/hackbright/_images/computer-cat.gif" />
+</section></section>
+
+
+    </div>
+  </div>
+
+<script src="/static/hackbright/_static/revealjs/lib/js/head.min.js"></script>
+<script src="/static/hackbright/_static/revealjs/js/reveal.js"></script>
+<script>
+  Reveal.initialize({
+    maxScale: 5,
+    width: 1280,
+    height: 800,
+    margin: 0.1,
+    transition: 'slide',
+    dependencies: [
+      {src: "/static/hackbright/_static/revealjs/plugin/notes/notes.js", async: true},
+    ]
+  });
+  // External links should open in new window
+  var externalLinks = document.getElementsByClassName("external");
+  for (var i = 0; i < externalLinks.length; i++)
+    externalLinks[i].setAttribute('target', '_blank');
+</script>
+
+</body>
+</html>
